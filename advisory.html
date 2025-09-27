@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisory - Kisan AI</title>
+    <meta name="description" content="Get detailed crop advisory including fertilizer schedules, pest management, and market insights.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#16a34a',
+                        'farm-dark': '#15803d',
+                        'farm-light': '#22c55e',
+                        'earth-brown': '#92400e',
+                        'sky-blue': '#0ea5e9'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+</head>
+<body class="bg-green-50 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 bg-farm-green shadow-lg">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo/Title (Left) -->
+                <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                    <span class="text-3xl">🌱</span>
+                    <span class="text-white text-lg md:text-xl font-bold">Kisan AI</span>
+                </a>
+                
+                <!-- Desktop Navigation (Center) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="dashboard">Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">Crop Selection</a>
+                    <a href="advisory.html" class="text-white bg-farm-dark px-3 py-2 rounded-lg text-lg font-medium border-b-2 border-green-300 transition-colors" data-translate="advisory">Advisory</a>
+                    <a href="help.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="help">Help</a>
+                </div>
+                
+                <!-- Right Side: Language Selector + Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
+                        <select class="bg-white text-farm-green px-3 py-2 rounded-lg text-sm font-medium border-2 border-green-200 focus:ring-2 focus:ring-green-300 focus:border-green-400 shadow-sm">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="kn">ಕನ್ನಡ</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white p-2 rounded-lg hover:bg-farm-dark transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-green-600">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="index.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="home">🏠 Home</a>
+                    <a href="dashboard.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="dashboard">📊 Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">🌾 Crop Selection</a>
+                    <a href="advisory.html" class="text-white bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium border-b-2 border-green-300" data-translate="advisory">📋 Advisory</a>
+                    <a href="help.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="help">❓ Help</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Crop Advisory</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">Comprehensive farming recommendations tailored to your crop selection and farm conditions</p>
+            <a href="crop-selection.html" class="bg-farm-green text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-farm-dark transition-colors shadow-lg">
+                Select Different Crop
+            </a>
+        </div>
+
+        <!-- Advisory Sections in Responsive Grid -->
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 space-y-0">
+            <!-- Seeds Recommendation -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-4xl mr-4">🌾</div>
+                    <h2 class="text-2xl font-bold text-gray-800" data-translate="seedSuggestions">Seeds Recommendation</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="border-2 border-green-200 rounded-xl p-6 hover:border-farm-green transition-colors">
+                        <h3 class="text-lg font-bold text-farm-green mb-2">HD-2967 Wheat</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-yielding variety suitable for irrigated conditions</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm text-gray-500">
+                            <div><strong>Yield:</strong> 45-50 quintals/hectare</div>
+                            <div><strong>Duration:</strong> 150-155 days</div>
+                        </div>
+                    </div>
+                    <div class="border-2 border-green-200 rounded-xl p-6 hover:border-farm-green transition-colors">
+                        <h3 class="text-lg font-bold text-farm-green mb-2">PBW-725</h3>
+                        <p class="text-gray-600 text-sm mb-3">Disease resistant variety with good grain quality</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm text-gray-500">
+                            <div><strong>Yield:</strong> 42-47 quintals/hectare</div>
+                            <div><strong>Duration:</strong> 145-150 days</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fertilizer Schedule -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-4xl mr-4">🧪</div>
+                    <h2 class="text-2xl font-bold text-gray-800" data-translate="fertilizerSchedule">Fertilizer Schedule</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start p-4 bg-green-50 rounded-lg border-l-4 border-farm-green">
+                        <div class="bg-farm-green text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-1">Basal Application</h3>
+                            <p class="text-gray-600 text-sm mb-1">60 kg N + 60 kg P + 40 kg K per hectare</p>
+                            <p class="text-xs text-gray-500">At sowing time</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <div class="bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-1">First Top Dressing</h3>
+                            <p class="text-gray-600 text-sm mb-1">30 kg Nitrogen per hectare</p>
+                            <p class="text-xs text-gray-500">21 days after sowing</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <div class="bg-yellow-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-1">Second Top Dressing</h3>
+                            <p class="text-gray-600 text-sm mb-1">30 kg Nitrogen per hectare</p>
+                            <p class="text-xs text-gray-500">45 days after sowing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pest/Disease Alerts -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-4xl mr-4">🐛</div>
+                    <h2 class="text-2xl font-bold text-gray-800" data-translate="pestAlerts">Pest/Disease Alerts</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="text-2xl mr-3">⚠️</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-700">Aphids</h3>
+                                <p class="text-red-600 text-sm">High Risk - Monitor Closely</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Small insects that suck plant sap, causing yellowing and stunted growth.</p>
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-red-800">Control: Spray Imidacloprid 17.8% SL @ 100ml/acre</p>
+                        </div>
+                    </div>
+                    <div class="bg-orange-50 border-2 border-orange-200 rounded-xl p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="text-2xl mr-3">🔍</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-orange-700">Stem Borer</h3>
+                                <p class="text-orange-600 text-sm">Medium Risk - Regular Monitoring</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Larvae bore into stems causing dead hearts and white ears.</p>
+                        <div class="bg-orange-100 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-orange-800">Control: Use Cartap Hydrochloride 4G @ 18.5 kg/hectare</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Price Trends Chart -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-4xl mr-4">📈</div>
+                    <h2 class="text-2xl font-bold text-gray-800" data-translate="marketTrends">Market Price Trends</h2>
+                </div>
+                <div class="h-64 mb-6">
+                    <canvas id="marketTrendChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <div class="text-xl font-bold text-farm-green">₹2,200</div>
+                        <div class="text-sm text-gray-600">Current Price</div>
+                    </div>
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <div class="text-xl font-bold text-blue-600">+5%</div>
+                        <div class="text-sm text-gray-600">Weekly Change</div>
+                    </div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="text-xl font-bold text-yellow-600">High</div>
+                        <div class="text-sm text-gray-600">Demand</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <div class="text-xl font-bold text-purple-600">Apr-May</div>
+                        <div class="text-sm text-gray-600">Best Selling</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-farm-dark text-white py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-green-300">&copy; 2024 Kisan AI. Made with ❤️ for Indian Farmers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script>
+        // Mobile menu toggle functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
+                            <h3 class="card-title">Cultivation Practices</h3>
+                        </div>
+                        <div class="cultivation-timeline">
+                            <div class="timeline-item" style="display: flex; margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
+                                <div style="position: absolute; left: 0; top: 0; width: 12px; height: 12px; background: var(--secondary-color); border-radius: 50%;"></div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Land Preparation</h4>
+                                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">Deep plowing followed by 2-3 cross harrowings. Level the field properly for uniform water distribution.</p>
+                                    <small class="text-light">Timeline: 15-20 days before sowing</small>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item" style="display: flex; margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
+                                <div style="position: absolute; left: 0; top: 0; width: 12px; height: 12px; background: var(--secondary-color); border-radius: 50%;"></div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Seed Selection & Sowing</h4>
+                                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">Use certified seeds (100-125 kg/hectare). Recommended varieties: HD-2967, PBW-725, DBW-187.</p>
+                                    <small class="text-light">Timeline: October 15 - November 30</small>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item" style="display: flex; margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
+                                <div style="position: absolute; left: 0; top: 0; width: 12px; height: 12px; background: var(--secondary-color); border-radius: 50%;"></div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Fertilizer Management</h4>
+                                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">Apply 120:60:40 NPK kg/hectare. Use organic manure 5-10 tons/hectare before sowing.</p>
+                                    <small class="text-light">Timeline: At sowing and top dressing</small>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item" style="display: flex; margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
+                                <div style="position: absolute; left: 0; top: 0; width: 12px; height: 12px; background: var(--secondary-color); border-radius: 50%;"></div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Irrigation Schedule</h4>
+                                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">4-6 irrigations required. Critical stages: Crown root initiation, tillering, flowering, and grain filling.</p>
+                                    <small class="text-light">Timeline: Throughout growing season</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pest & Disease Management -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Pest & Disease Management</h3>
+                        </div>
+                        
+                        <div class="pest-management">
+                            <div class="alert alert-warning">
+                                <h4 style="margin: 0 0 0.5rem 0;">Common Pests</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem;">
+                                    <li>Aphids - Monitor during flowering stage</li>
+                                    <li>Termites - Apply chlorpyrifos if needed</li>
+                                    <li>Army worm - Check during vegetative growth</li>
+                                </ul>
+                            </div>
+
+                            <div class="alert alert-danger">
+                                <h4 style="margin: 0 0 0.5rem 0;">Common Diseases</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem;">
+                                    <li>Rust - Apply propiconazole spray</li>
+                                    <li>Powdery mildew - Use sulfur-based fungicides</li>
+                                    <li>Loose smut - Use seed treatment</li>
+                                </ul>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <h4 style="margin: 0 0 0.5rem 0;">Preventive Measures</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem;">
+                                    <li>Regular field monitoring</li>
+                                    <li>Crop rotation with legumes</li>
+                                    <li>Use of resistant varieties</li>
+                                    <li>Proper field sanitation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Economic Analysis -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Economic Analysis & Profitability</h3>
+                    </div>
+                    
+                    <div class="grid grid-2">
+                        <div>
+                            <h4>Cost Breakdown (Per Hectare)</h4>
+                            <div class="cost-breakdown">
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 1px solid #E9ECEF;">
+                                    <span>Seeds</span>
+                                    <span>₹3,500</span>
+                                </div>
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 1px solid #E9ECEF;">
+                                    <span>Fertilizers</span>
+                                    <span>₹8,000</span>
+                                </div>
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 1px solid #E9ECEF;">
+                                    <span>Pesticides</span>
+                                    <span>₹2,500</span>
+                                </div>
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 1px solid #E9ECEF;">
+                                    <span>Labor</span>
+                                    <span>₹8,000</span>
+                                </div>
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 1px solid #E9ECEF;">
+                                    <span>Machinery</span>
+                                    <span>₹3,000</span>
+                                </div>
+                                <div class="flex justify-between align-center" style="padding: 0.5rem 0; border-bottom: 2px solid var(--primary-color); font-weight: bold;">
+                                    <span>Total Cost</span>
+                                    <span>₹25,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4>Revenue Projection</h4>
+                            <div class="revenue-analysis">
+                                <div class="stat-card text-center">
+                                    <span class="stat-number">42</span>
+                                    <div class="stat-label">Expected Yield (Quintals)</div>
+                                </div>
+                                <div class="stat-card text-center">
+                                    <span class="stat-number">₹2,200</span>
+                                    <div class="stat-label">Current Market Price</div>
+                                </div>
+                                <div class="stat-card text-center" style="border-left-color: var(--secondary-color);">
+                                    <span class="stat-number">₹92,400</span>
+                                    <div class="stat-label">Gross Revenue</div>
+                                </div>
+                                <div class="stat-card text-center" style="border-left-color: var(--primary-color);">
+                                    <span class="stat-number">₹67,400</span>
+                                    <div class="stat-label">Net Profit</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Considerations -->
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Weather Considerations</h3>
+                        </div>
+                        
+                        <div class="weather-requirements">
+                            <div style="margin-bottom: 1rem;">
+                                <h4 style="color: var(--primary-color);">Optimal Conditions</h4>
+                                <ul>
+                                    <li>Temperature: 15-25°C during growing season</li>
+                                    <li>Rainfall: 300-400mm well distributed</li>
+                                    <li>Humidity: 50-70% during grain filling</li>
+                                    <li>Sunshine: 6-8 hours daily</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <strong>Current Weather Impact:</strong> Favorable conditions expected for the next 15 days. Light rainfall predicted which is beneficial for crop growth.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Market Insights</h3>
+                        </div>
+                        
+                        <div class="market-insights">
+                            <div class="alert alert-success">
+                                <strong>Price Trend:</strong> Wheat prices have shown an upward trend of 8% in the last month.
+                            </div>
+                            
+                            <div class="market-stats">
+                                <div class="flex justify-between" style="margin-bottom: 0.5rem;">
+                                    <span>Current Price:</span>
+                                    <span style="font-weight: bold; color: var(--secondary-color);">₹2,200/quintal</span>
+                                </div>
+                                <div class="flex justify-between" style="margin-bottom: 0.5rem;">
+                                    <span>Last Month:</span>
+                                    <span>₹2,035/quintal</span>
+                                </div>
+                                <div class="flex justify-between" style="margin-bottom: 0.5rem;">
+                                    <span>Demand:</span>
+                                    <span style="color: var(--secondary-color);">High</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Best Selling Time:</span>
+                                    <span>April-May</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Plan -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Your Action Plan</h3>
+                        <p>Step-by-step plan for the next 30 days</p>
+                    </div>
+                    
+                    <div class="grid grid-3">
+                        <div class="action-item" style="padding: 1rem; border: 2px solid var(--secondary-color); border-radius: 8px; background: rgba(76, 175, 80, 0.1);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Week 1</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>Complete land preparation</li>
+                                <li>Procure certified seeds</li>
+                                <li>Arrange organic manure</li>
+                                <li>Check irrigation system</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="action-item" style="padding: 1rem; border: 2px solid var(--info-color); border-radius: 8px; background: rgba(33, 150, 243, 0.1);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Week 2-3</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>Apply basal fertilizers</li>
+                                <li>Complete sowing</li>
+                                <li>First irrigation if needed</li>
+                                <li>Monitor germination</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="action-item" style="padding: 1rem; border: 2px solid var(--warning-color); border-radius: 8px; background: rgba(255, 152, 0, 0.1);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Week 4</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>Check for pest/disease</li>
+                                <li>Plan first top dressing</li>
+                                <li>Weed management</li>
+                                <li>Monitor weather updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download & Share Options -->
+                <div class="card text-center">
+                    <h3>Save This Advisory</h3>
+                    <p>Download or share this personalized advisory for future reference</p>
+                    <div class="flex gap-2 justify-center">
+                        <button class="btn btn-primary" onclick="window.print()">📄 Download PDF</button>
+                        <button class="btn btn-secondary" onclick="shareAdvisory()">📤 Share Advisory</button>
+                        <button class="btn" style="background-color: var(--accent-color);" onclick="saveToFavorites()">⭐ Save to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Smart Crop Advisory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Check if crop data exists and display appropriate content
+        document.addEventListener('DOMContentLoaded', function() {
+            const cropData = localStorage.getItem('selectedCropData');
+            
+            if (cropData) {
+                // Hide default content and show sample advisory
+                document.getElementById('advisory-content').style.display = 'none';
+                document.getElementById('sample-advisory').style.display = 'block';
+                
+                // Generate and display actual advisory
+                setTimeout(() => {
+                    CropAdvisory.generateAdvisory();
+                }, 1000);
+            }
+        });
+
+        // Share advisory function
+        function shareAdvisory() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Crop Advisory - Smart Crop Advisory',
+                    text: 'Check out my personalized crop cultivation advisory',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    CropAdvisory.showAlert('Advisory link copied to clipboard!', 'success');
+                });
+            }
+        }
+
+        // Save to favorites function
+        function saveToFavorites() {
+            const cropData = localStorage.getItem('selectedCropData');
+            if (cropData) {
+                let favorites = JSON.parse(localStorage.getItem('favoriteAdvisories') || '[]');
+                const advisory = {
+                    id: Date.now(),
+                    cropData: JSON.parse(cropData),
+                    savedAt: new Date().toISOString(),
+                    title: `${JSON.parse(cropData).cropType} Advisory`
+                };
+                
+                favorites.push(advisory);
+                localStorage.setItem('favoriteAdvisories', JSON.stringify(favorites));
+                CropAdvisory.showAlert('Advisory saved to favorites!', 'success');
+            }
+        }
+
+        // Print styles for PDF download
+        const printStyles = `
+            <style>
+                @media print {
+                    .header, .footer, .btn { display: none !important; }
+                    .card { break-inside: avoid; margin-bottom: 20px; }
+                    .grid { display: block; }
+                    .grid > * { margin-bottom: 20px; }
+                }
+            </style>
+        `;
+        document.head.insertAdjacentHTML('beforeend', printStyles);
+    </script>
+</body>
+</html>

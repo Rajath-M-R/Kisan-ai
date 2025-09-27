@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Kisan AI</title>
+    <meta name="description" content="View your personalized farmer dashboard with weather updates, crop status, and recommendations from your personalized dashboard.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#16a34a',
+                        'farm-dark': '#15803d',
+                        'farm-light': '#22c55e',
+                        'earth-brown': '#92400e',
+                        'sky-blue': '#0ea5e9'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+</head>
+<body class="bg-green-50">
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 bg-farm-green shadow-lg">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo/Title (Left) -->
+                <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                    <span class="text-3xl">🌱</span>
+                    <span class="text-white text-lg md:text-xl font-bold">Kisan AI</span>
+                </a>
+                
+                <!-- Desktop Navigation (Center) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard.html" class="text-white bg-farm-dark px-3 py-2 rounded-lg text-lg font-medium border-b-2 border-green-300 transition-colors" data-translate="dashboard">Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">Crop Selection</a>
+                    <a href="advisory.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="advisory">Advisory</a>
+                    <a href="help.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="help">Help</a>
+                </div>
+                
+                <!-- Right Side: Language Selector + Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
+                        <select class="bg-white text-farm-green px-3 py-2 rounded-lg text-sm font-medium border-2 border-green-200 focus:ring-2 focus:ring-green-300 focus:border-green-400 shadow-sm">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="kn">ಕನ್ನಡ</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white p-2 rounded-lg hover:bg-farm-dark transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-green-600">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="index.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="home">🏠 Home</a>
+                    <a href="dashboard.html" class="text-white bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium border-b-2 border-green-300" data-translate="dashboard">📊 Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">🌾 Crop Selection</a>
+                    <a href="advisory.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="advisory">📋 Advisory</a>
+                    <a href="help.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="help">❓ Help</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Dashboard Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2" data-translate="welcomeBack">Welcome Back, Farmer!</h1>
+                <p class="text-gray-600 text-lg">Here's your farm overview for today</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="crop-selection.html" class="bg-farm-green text-white px-6 py-3 rounded-lg font-bold hover:bg-farm-dark transition-colors">Get New Advisory</a>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-farm-green">
+                <div class="text-3xl font-bold text-farm-green mb-2">5.2</div>
+                <div class="text-gray-600 text-sm">Hectares Cultivated</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-blue-500">
+                <div class="text-3xl font-bold text-blue-500 mb-2">3</div>
+                <div class="text-gray-600 text-sm">Active Crops</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-yellow-500">
+                <div class="text-3xl font-bold text-yellow-500 mb-2">₹2.8L</div>
+                <div class="text-gray-600 text-sm">Expected Revenue</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-green-500">
+                <div class="text-3xl font-bold text-green-500 mb-2">85%</div>
+                <div class="text-gray-600 text-sm">Crop Health Score</div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Weather Widget -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800" data-translate="todayWeather">Today's Weather</h3>
+                    <button class="bg-sky-blue text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors" onclick="CropAdvisory.fetchWeatherData()">Refresh</button>
+                </div>
+                <div id="weather-widget" class="bg-gradient-to-br from-sky-blue to-blue-600 text-white p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-2">🌤️</div>
+                    <div class="text-3xl font-bold mb-2" id="weather-temp">28°C</div>
+                    <div class="text-lg mb-4" id="weather-condition">Partly Cloudy</div>
+                    <div class="grid grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <div class="font-medium" data-translate="humidity">Humidity</div>
+                            <div id="weather-humidity">65%</div>
+                        </div>
+                        <div>
+                            <div class="font-medium">Wind</div>
+                            <div id="weather-wind">12 km/h</div>
+                        </div>
+                        <div>
+                            <div class="font-medium" data-translate="rainfall">Rainfall</div>
+                            <div id="weather-rainfall">0mm</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Crops -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 mb-4" data-translate="cropAdvisory">Active Crops</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg border-l-4 border-farm-green">
+                        <div>
+                            <h4 class="font-bold text-farm-green text-lg">🌾 Wheat</h4>
+                            <p class="text-gray-600 text-sm">2.5 hectares • Planted: Oct 2024</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="w-24 bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-farm-green h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <span class="text-sm font-medium text-farm-green">75% Growth</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <div>
+                            <h4 class="font-bold text-yellow-600 text-lg">🌻 Mustard</h4>
+                            <p class="text-gray-600 text-sm">1.5 hectares • Planted: Nov 2024</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="w-24 bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <span class="text-sm font-medium text-yellow-600">60% Growth</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                        <div>
+                            <h4 class="font-bold text-orange-600 text-lg">🫘 Chickpea</h4>
+                            <p class="text-gray-600 text-sm">1.2 hectares • Planted: Nov 2024</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="w-24 bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <span class="text-sm font-medium text-orange-600">45% Growth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts and Notifications -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4" data-translate="alerts">Alerts & Notifications</h3>
+            <div class="space-y-4">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                    <div class="flex items-center">
+                        <div class="text-yellow-400 text-xl mr-3">⚠️</div>
+                        <div>
+                            <p class="font-medium text-yellow-800">Weather Alert</p>
+                            <p class="text-yellow-700 text-sm">Light rainfall expected in next 2 days. Consider postponing fertilizer application for wheat crop.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                    <div class="flex items-center">
+                        <div class="text-blue-400 text-xl mr-3">📈</div>
+                        <div>
+                            <p class="font-medium text-blue-800">Market Update</p>
+                            <p class="text-blue-700 text-sm">Wheat prices have increased by 5% this week. Current rate: ₹2,250 per quintal.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded">
+                    <div class="flex items-center">
+                        <div class="text-green-400 text-xl mr-3">✅</div>
+                        <div>
+                            <p class="font-medium text-green-800">Crop Health</p>
+                            <p class="text-green-700 text-sm">Your mustard crop is showing excellent growth. Continue current irrigation schedule.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Market Trend Chart -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Market Price Trends</h3>
+                <div class="h-64">
+                    <canvas id="marketTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Yield Comparison Chart -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Yield Comparison</h3>
+                <div class="h-64">
+                    <canvas id="yieldChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">Quick Actions</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="crop-selection.html" class="bg-farm-green text-white p-4 rounded-lg text-center hover:bg-farm-dark transition-colors">
+                    <div class="text-2xl mb-2">🌱</div>
+                    <div class="text-sm font-medium">Add New Crop</div>
+                </a>
+                <a href="advisory.html" class="bg-blue-500 text-white p-4 rounded-lg text-center hover:bg-blue-600 transition-colors">
+                    <div class="text-2xl mb-2">📋</div>
+                    <div class="text-sm font-medium">Get Advisory</div>
+                </a>
+                <button onclick="CropAdvisory.fetchWeatherData()" class="bg-sky-blue text-white p-4 rounded-lg text-center hover:bg-blue-600 transition-colors">
+                    <div class="text-2xl mb-2">🌤️</div>
+                    <div class="text-sm font-medium">Weather Update</div>
+                </button>
+                <a href="help.html" class="bg-yellow-500 text-white p-4 rounded-lg text-center hover:bg-yellow-600 transition-colors">
+                    <div class="text-2xl mb-2">💬</div>
+                    <div class="text-sm font-medium">Get Support</div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-farm-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-green-300">&copy; 2024 Kisan AI. Made with ❤️ for Indian Farmers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script>
+        // Initialize weather data on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            const weatherData = await CropAdvisory.fetchWeatherData();
+            document.getElementById('weather-temp').textContent = weatherData.temperature + '°C';
+            document.getElementById('weather-condition').textContent = weatherData.condition;
+            document.getElementById('weather-humidity').textContent = weatherData.humidity + '%';
+            document.getElementById('weather-rainfall').textContent = weatherData.rainfall + 'mm';
+        });
+
+        // Mobile menu toggle functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

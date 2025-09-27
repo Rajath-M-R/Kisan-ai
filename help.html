@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Kisan AI</title>
+    <meta name="description" content="Get help and support for using Kisan AI. Find answers to frequently asked questions and contact our support team.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#16a34a',
+                        'farm-dark': '#15803d',
+                        'farm-light': '#22c55e',
+                        'earth-brown': '#92400e',
+                        'sky-blue': '#0ea5e9'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+</head>
+<body class="bg-green-50 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 bg-farm-green shadow-lg">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo/Title (Left) -->
+                <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                    <span class="text-3xl">🌱</span>
+                    <span class="text-white text-lg md:text-xl font-bold">Kisan AI</span>
+                </a>
+                
+                <!-- Desktop Navigation (Center) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="dashboard">Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">Crop Selection</a>
+                    <a href="advisory.html" class="text-white hover:text-green-200 px-3 py-2 rounded-lg text-lg font-medium transition-colors" data-translate="advisory">Advisory</a>
+                    <a href="help.html" class="text-white bg-farm-dark px-3 py-2 rounded-lg text-lg font-medium border-b-2 border-green-300 transition-colors" data-translate="help">Help</a>
+                </div>
+                
+                <!-- Right Side: Language Selector + Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
+                        <select class="bg-white text-farm-green px-3 py-2 rounded-lg text-sm font-medium border-2 border-green-200 focus:ring-2 focus:ring-green-300 focus:border-green-400 shadow-sm">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="kn">ಕನ್ನಡ</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white p-2 rounded-lg hover:bg-farm-dark transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-green-600">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="index.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="home">🏠 Home</a>
+                    <a href="dashboard.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="dashboard">📊 Dashboard</a>
+                    <a href="crop-selection.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="cropSelection">🌾 Crop Selection</a>
+                    <a href="advisory.html" class="text-white hover:bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium transition-colors" data-translate="advisory">📋 Advisory</a>
+                    <a href="help.html" class="text-white bg-farm-dark px-4 py-3 rounded-lg text-lg font-medium border-b-2 border-green-300" data-translate="help">❓ Help</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Help & Support</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Find answers to your questions or get in touch with our support team for personalized assistance</p>
+        </div>
+        
+        <!-- Content Sections with Proper Spacing -->
+        <div class="space-y-12 max-w-6xl mx-auto">
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-8" data-translate="faqTitle">Frequently Asked Questions</h2>
+                
+                <div class="space-y-6">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 focus:outline-none transition-colors" onclick="toggleFAQ(this)">
+                            <span class="text-lg font-semibold text-gray-800">How accurate are the crop recommendations?</span>
+                            <span class="faq-icon text-2xl text-farm-green font-bold">+</span>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-700 text-base leading-relaxed" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <p class="pt-4 border-t border-gray-200">Our recommendations are based on scientific research, regional agricultural data, weather patterns, and soil conditions. While we strive for high accuracy, actual results may vary due to local conditions and farming practices.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 focus:outline-none transition-colors" onclick="toggleFAQ(this)">
+                            <span class="text-lg font-semibold text-gray-800">Can I get recommendations for multiple crops?</span>
+                            <span class="faq-icon text-2xl text-farm-green font-bold">+</span>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-700 text-base leading-relaxed" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <p class="pt-4 border-t border-gray-200">Yes! You can get recommendations for multiple crops by going through the crop selection process for each crop you're interested in. The system will provide tailored advice for each crop based on your farm conditions.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 focus:outline-none transition-colors" onclick="toggleFAQ(this)">
+                            <span class="text-lg font-semibold text-gray-800">How often is the weather data updated?</span>
+                            <span class="faq-icon text-2xl text-farm-green font-bold">+</span>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-700 text-base leading-relaxed" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <p class="pt-4 border-t border-gray-200">Weather data is updated multiple times daily from reliable meteorological sources. The dashboard shows current conditions and provides forecasts for up to 7 days.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 focus:outline-none transition-colors" onclick="toggleFAQ(this)">
+                            <span class="text-lg font-semibold text-gray-800">What if I don't know my soil type?</span>
+                            <span class="faq-icon text-2xl text-farm-green font-bold">+</span>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-700 text-base leading-relaxed" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <p class="pt-4 border-t border-gray-200">If you're unsure about your soil type, you can select the most similar option or contact your local agricultural extension office for professional soil testing services. We also provide general recommendations that work for most soil types.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 focus:outline-none transition-colors" onclick="toggleFAQ(this)">
+                            <span class="text-lg font-semibold text-gray-800">Is there a mobile app available?</span>
+                            <span class="faq-icon text-2xl text-farm-green font-bold">+</span>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-700 text-base leading-relaxed" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <p class="pt-4 border-t border-gray-200">Currently, Smart Crop Advisory is available as a web application that works on all devices including smartphones and tablets. A dedicated mobile app is in development and will be available soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Form Section -->
+            <section class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-6" data-translate="contactUs">Contact Us</h2>
+                <p class="text-lg text-gray-600 text-center mb-8">Can't find what you're looking for? Send us a message and we'll get back to you within 24 hours.</p>
+                
+                <form id="contactForm" class="space-y-6">
+                    <!-- Name Field -->
+                    <div>
+                        <label for="contactName" class="block text-lg font-semibold text-gray-800 mb-2">Full Name *</label>
+                        <input type="text" id="contactName" name="name" required 
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-lg focus:ring-2 focus:ring-farm-green focus:border-farm-green transition-colors"
+                               placeholder="Enter your full name">
+                    </div>
+                    
+                    <!-- Phone Field -->
+                    <div>
+                        <label for="contactPhone" class="block text-lg font-semibold text-gray-800 mb-2">Phone Number *</label>
+                        <input type="tel" id="contactPhone" name="phone" required 
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-lg focus:ring-2 focus:ring-farm-green focus:border-farm-green transition-colors"
+                               placeholder="Enter your phone number">
+                    </div>
+                    
+                    <!-- Query Field -->
+                    <div>
+                        <label for="contactMessage" class="block text-lg font-semibold text-gray-800 mb-2">Your Query *</label>
+                        <textarea id="contactMessage" name="message" required rows="5"
+                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-lg focus:ring-2 focus:ring-farm-green focus:border-farm-green transition-colors resize-none"
+                                  placeholder="Please describe your question or issue in detail..."></textarea>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="text-center pt-4">
+                        <button type="submit" 
+                                class="bg-farm-green text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-farm-dark transition-colors shadow-lg">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Chatbot Section -->
+            <section class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-6" data-translate="chatbotTitle">Chat Support</h2>
+                <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6 text-center">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <h3 class="text-xl font-bold text-farm-green mb-2">AI Assistant Coming Soon</h3>
+                    <p class="text-gray-600 mb-4">Our AI-powered chatbot will help you get instant answers to your farming questions.</p>
+                    <button class="bg-farm-green text-white px-6 py-3 rounded-lg font-bold hover:bg-farm-dark transition-colors" onclick="showChatbotDemo()">
+                        Try Demo Chat
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Chatbot Demo Modal -->
+    <div id="chatbot-demo" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4">
+            <div class="bg-farm-green text-white p-4 rounded-t-2xl flex justify-between items-center">
+                <h3 class="font-bold">Kisan AI Assistant</h3>
+                <button onclick="hideChatbotDemo()" class="text-white hover:text-gray-200">×</button>
+            </div>
+            <div class="p-4 h-80 overflow-y-auto" id="chat-messages">
+                <div class="mb-4">
+                    <div class="bg-gray-100 p-3 rounded-lg inline-block">
+                        <p class="text-sm">Hello! I'm your Kisan AI Assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t">
+                <div class="flex space-x-2">
+                    <input type="text" id="chat-input" placeholder="Type your question..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-farm-green">
+                    <button onclick="sendDemoMessage()" class="bg-farm-green text-white px-4 py-2 rounded-lg hover:bg-farm-dark transition-colors">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-farm-dark text-white py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-green-300">&copy; 2024 Kisan AI. Made with ❤️ for Indian Farmers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.faq-icon');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-content').forEach(otherContent => {
+                if (otherContent !== content) {
+                    otherContent.style.maxHeight = null;
+                    otherContent.previousElementSibling.querySelector('.faq-icon').textContent = '+';
+                }
+            });
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = '+';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+
+        function showChatbotDemo() {
+            document.getElementById('chatbot-demo').classList.remove('hidden');
+            document.getElementById('chatbot-demo').classList.add('flex');
+        }
+
+        function hideChatbotDemo() {
+            document.getElementById('chatbot-demo').classList.add('hidden');
+            document.getElementById('chatbot-demo').classList.remove('flex');
+        }
+
+        function sendDemoMessage() {
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'mb-4 text-right';
+            userMessage.innerHTML = `<div class="bg-farm-green text-white p-3 rounded-lg inline-block max-w-xs"><p class="text-sm">${message}</p></div>`;
+            messages.appendChild(userMessage);
+            
+            input.value = '';
+            
+            // Add bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'mb-4';
+                botMessage.innerHTML = `<div class="bg-gray-100 p-3 rounded-lg inline-block max-w-xs"><p class="text-sm">Thank you for your question about "${message}". Our AI assistant is currently in development. For now, please check our FAQ section above or contact our support team.</p></div>`;
+                messages.appendChild(botMessage);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+            
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendDemoMessage();
+            }
+        });
+
+        // Mobile menu toggle functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const message = formData.get('message');
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                alert(`Thank you, ${name}! Your message has been received. We'll contact you at ${phone} within 24 hours.`);
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Frequently Asked Questions</h2>
+                    <p>Find quick answers to common questions</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item" style="border-bottom: 1px solid #E9ECEF; padding: 1.5rem 0;">
+                        <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
+                            <h3 style="margin: 0; color: var(--primary-color);">How accurate are the crop recommendations?</h3>
+                            <span class="faq-toggle" style="font-size: 1.5rem; color: var(--secondary-color);">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 1rem; padding-left: 1rem; border-left: 3px solid var(--secondary-color);">
+                            <p>Our recommendations are based on scientific research, regional agricultural data, weather patterns, and soil conditions. While we strive for high accuracy, actual results may vary due to local conditions.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" style="border-bottom: 1px solid #E9ECEF; padding: 1.5rem 0;">
+                        <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
+                            <h3 style="margin: 0; color: var(--primary-color);">Can I get recommendations for multiple crops?</h3>
+                            <span class="faq-toggle" style="font-size: 1.5rem; color: var(--secondary-color);">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 1rem; padding-left: 1rem; border-left: 3px solid var(--secondary-color);">
+                            <p>Yes! You can get recommendations for multiple crops by going through the crop selection process for each crop you're interested in.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" style="border-bottom: 1px solid #E9ECEF; padding: 1.5rem 0;">
+                        <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
+                            <h3 style="margin: 0; color: var(--primary-color);">How often is the weather data updated?</h3>
+                            <span class="faq-toggle" style="font-size: 1.5rem; color: var(--secondary-color);">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 1rem; padding-left: 1rem; border-left: 3px solid var(--secondary-color);">
+                            <p>Weather data is updated multiple times daily from reliable meteorological sources. The dashboard shows current conditions and provides forecasts for up to 7 days.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Contact Support</h2>
+                    <p>Get in touch with our team of agricultural experts</p>
+                </div>
+
+                <div class="grid grid-2">
+                    <!-- Contact Information -->
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Get in Touch</h3>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-item" style="display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: #F8F9FA; border-radius: 8px;">
+                                <div style="margin-right: 1rem; font-size: 1.5rem;">📞</div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Phone Support</h4>
+                                    <p style="margin: 0; color: var(--light-text);">+91-1800-123-CROP (2767)</p>
+                                    <small>Available: Mon-Sat, 9 AM - 6 PM IST</small>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" style="display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: #F8F9FA; border-radius: 8px;">
+                                <div style="margin-right: 1rem; font-size: 1.5rem;">📧</div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--primary-color);">Email Support</h4>
+                                    <p style="margin: 0; color: var(--light-text);">support@smartcropadvisory.com</p>
+                                    <small>Response time: Within 24 hours</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Send us a Message</h3>
+                        
+                        <form id="contactForm" data-form-type="contact">
+                            <div class="form-group">
+                                <label for="contactName" class="form-label">Full Name *</label>
+                                <input type="text" id="contactName" name="name" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactEmail" class="form-label">Email Address *</label>
+                                <input type="email" id="contactEmail" name="email" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactSubject" class="form-label">Subject *</label>
+                                <select id="contactSubject" name="subject" class="form-control form-select" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="technical-support">Technical Support</option>
+                                    <option value="crop-advisory">Crop Advisory Question</option>
+                                    <option value="account-help">Account Help</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactMessage" class="form-label">Message *</label>
+                                <textarea id="contactMessage" name="message" class="form-control" rows="4" placeholder="Please describe your question or issue..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Smart Crop Advisory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+            
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+                toggle.textContent = '−';
+            } else {
+                answer.style.display = 'none';
+                toggle.textContent = '+';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            CropAdvisory.showLoading('Sending your message...');
+            setTimeout(() => {
+                CropAdvisory.hideLoading();
+                CropAdvisory.showAlert('Thank you! We will get back to you within 24 hours.', 'success');
+                this.reset();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
